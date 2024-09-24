@@ -2,11 +2,14 @@ import { shortenAddress } from "@/utils/address";
 import { useTonConnectUI, useTonAddress } from "@tonconnect/ui-react";
 import Card from "../Shared/Card";
 import Button from "../Shared/Button";
+import { toGweiTon } from "@/utils/parse";
 
 type Transaction = {
   validUntil: number;
   messages: { address: string; amount: string }[];
 };
+
+const TRANSFER_AMOUNT = 0.000001;
 
 const SelfTransfer = () => {
   const account = useTonAddress();
@@ -17,7 +20,7 @@ const SelfTransfer = () => {
     messages: [
       {
         address: account,
-        amount: "1000", // Must be > 0
+        amount: String(toGweiTon(TRANSFER_AMOUNT)), // Must be > 0
       },
     ],
   };
@@ -32,7 +35,7 @@ const SelfTransfer = () => {
     <Card>
       <Button
         onClick={handleSendTransaction}
-        label={"Send your 0.000001 TON"}
+        label={`Send your ${TRANSFER_AMOUNT} TON`}
       />
     </Card>
   );
