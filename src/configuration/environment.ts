@@ -1,0 +1,6 @@
+const ENVIRONMENT = {
+  TELEGRAM_APP_ID: process.env.NEXT_PUBLIC_TELEGRAM_API_ID || "",
+  TELEGRAM_API_HASH: process.env.NEXT_PUBLIC_TELEGRAM_API_HASH || "",
+};
+
+export default ENVIRONMENT;
