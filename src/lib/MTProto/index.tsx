@@ -70,12 +70,18 @@ class MTProtoClient {
     return response;
   }
 
-  async fetchContactIds() {
+  async fetchContactIds(): Promise<any[]> {
     const response = await this.call("contacts.getContacts", {
       hash: 0,
     });
     if (response.error_message) return [];
-    return response.users.map((user: User) => user.id);
+    return response.users.map((user: User) => {
+      return {
+        id: user.id,
+        username: user.username,
+        firstName: user.first_name,
+      };
+    });
   }
 }
 

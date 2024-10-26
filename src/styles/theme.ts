@@ -17,6 +17,7 @@ const baseTheme = {
     large: "16rem",
     xlarge: "24rem",
   },
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -33,7 +34,7 @@ export const lightTheme: DefaultTheme = {
 
     background: "#1c1c1c",
     backgroundAlt: "black",
-    backgroundCard: "#ffffff",
+    backgroundCard: "#2c2c2e",
     backgroundInverse: "#333333",
 
     success: "#27ae60",
@@ -57,7 +58,7 @@ export const darkTheme: DefaultTheme = {
 
     background: "#1c1c1c",
     backgroundAlt: "black",
-    backgroundCard: "#ffffff",
+    backgroundCard: "#2c2c2e",
     backgroundInverse: "#333333",
 
     success: "#27ae60",

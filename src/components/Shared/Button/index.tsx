@@ -1,7 +1,8 @@
 "use client";
 
 import { FC } from "react";
-import { ButtonContainer } from "./style";
+import { ButtonContainer, ButtonIcon } from "./style";
+import Image from "next/image";
 
 interface IProps {
   id?: string;
@@ -10,19 +11,43 @@ interface IProps {
   size?: "tiny" | "small" | "medium" | "large";
   variant?: "primary" | "secondary";
   disabled?: boolean;
+  startIcon?: JSX.Element | string;
+  endIcon?: JSX.Element | string;
 }
 
-const DEFAULT_PROPS: IProps = {
-  id: "",
-  label: "",
-  onClick: () => {},
-  size: "small",
-  variant: "primary",
-  disabled: false,
+const RenderButtonIcon = (icon: JSX.Element | string, alt: string) => {
+  if (typeof icon === "string") {
+    return (
+      <ButtonIcon>
+        <Image src={icon} alt={alt} fill />
+      </ButtonIcon>
+    );
+  }
+  return <>{icon}</>;
 };
 
-const Button: FC<IProps> = (props = DEFAULT_PROPS) => {
-  return <ButtonContainer {...props}>{props.label}</ButtonContainer>;
+const Button: FC<IProps> = ({
+  id = "",
+  label = "",
+  onClick = () => {},
+  size = "small",
+  variant = "primary",
+  disabled = false,
+  startIcon,
+  endIcon,
+}) => {
+  return (
+    <ButtonContainer
+      size={size}
+      onClick={onClick}
+      variant={variant}
+      disabled={disabled}
+    >
+      {startIcon && RenderButtonIcon(startIcon, label ?? "")}
+      {label}
+      {endIcon && RenderButtonIcon(endIcon, label ?? "")}
+    </ButtonContainer>
+  );
 };
 
 export default Button;

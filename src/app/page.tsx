@@ -6,7 +6,7 @@ import HapticTest from "@/components/HapticTest";
 export default function Home() {
   return (
     <>
-      <HapticTest />
+      <Auth />
     </>
   );
 }
