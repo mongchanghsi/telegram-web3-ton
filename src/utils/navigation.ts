@@ -17,7 +17,7 @@ export enum NAVIGATION_ROUTE {
 
 export const NAVIGATION_LABEL = {
   [NAVIGATION_ROUTE.HOME]: "Profile",
-  [NAVIGATION_ROUTE.GAME]: "Game",
+  [NAVIGATION_ROUTE.GAME]: "Play",
   [NAVIGATION_ROUTE.HISTORY]: "History",
 };
 

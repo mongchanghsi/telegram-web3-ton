@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { forwardRef, LegacyRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { forwardRef, LegacyRef } from "react";
 import {
   BottomNavigationContainer,
   BottomNavigationIcon,
@@ -15,9 +15,6 @@ import Link from "next/link";
 
 const BottomNavigation = forwardRef((_, ref: LegacyRef<HTMLElement>) => {
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleRoute = (path: string) => {};
 
   return (
     <BottomNavigationContainer ref={ref}>

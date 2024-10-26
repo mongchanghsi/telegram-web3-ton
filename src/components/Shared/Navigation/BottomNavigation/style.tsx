@@ -11,7 +11,7 @@ export const BottomNavigationContainer = styled.footer`
   align-items: center;
 
   ${({ theme }) => css`
-    border-top: 1px solid ${theme.light};
+    background: ${theme.colors.backgroundAlt};
   `};
 `;
 
@@ -25,10 +25,6 @@ export const BottomNavigationItem = styled.div`
   gap: 12px;
   padding: 12px;
   padding-bottom: 36px;
-
-  ${({ theme }) => css`
-    background: ${theme.primary};
-  `};
 `;
 
 export const BottomNavigationIcon = styled.div<{ selected: number }>`
@@ -52,6 +48,6 @@ export const BottomNavigationItemLabel = styled.p<{ selected: number }>`
   margin: 0;
 
   ${({ theme, selected }) => css`
-    color: ${selected ? theme.secondary : theme.light};
+    color: ${selected ? theme.colors.secondary : theme.colors.primary};
   `};
 `;

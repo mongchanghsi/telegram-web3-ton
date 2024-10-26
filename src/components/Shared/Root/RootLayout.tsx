@@ -3,7 +3,6 @@ import styles from "@/styles";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import BottomNavigation from "../Navigation/BottomNavigation";
 import TopNavigation from "../Navigation/TopNavigation";
-import { useTonWallet } from "@tonconnect/ui-react";
 
 const RootLayoutContainer = styled.div`
   position: relative;
@@ -15,6 +14,10 @@ const RootLayoutContainer = styled.div`
     flex-direction: row;
     align-items: flex-start;
   }
+
+  ${({ theme }) => css`
+    background: ${theme.colors.background};
+  `}
 `;
 
 const RootLayoutContent = styled.div<{
@@ -49,8 +52,6 @@ const RootLayoutContent = styled.div<{
 `;
 
 const RootLayout = ({ children }: PropsWithChildren) => {
-  const wallet = useTonWallet();
-
   const topNavigationRef = useRef<HTMLDivElement>(null);
   const [topNavigationOffset, setTopNavigationOffset] = useState<number>(0);
 
@@ -66,7 +67,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <TopNavigation ref={topNavigationRef} />
-      {wallet && <BottomNavigation ref={bottomNavigationRef} />}
+      <BottomNavigation ref={bottomNavigationRef} />
       <RootLayoutContainer>
         <RootLayoutContent
           topOffset={topNavigationOffset}

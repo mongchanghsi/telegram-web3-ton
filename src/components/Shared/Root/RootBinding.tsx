@@ -1,5 +1,6 @@
-import { useViewport, bindViewportCSSVars } from "@telegram-apps/sdk-react";
+// import { useViewport, bindViewportCSSVars } from "@telegram-apps/sdk-react";
 import { PropsWithChildren, useEffect } from "react";
+import { miniApp } from "@telegram-apps/sdk-react";
 
 // TODO: Not sure why calling either themeParams or viewport will solve the TelegramGameProxy.receiveEvent issue
 const RootBinding = ({ children }: PropsWithChildren) => {
@@ -15,11 +16,11 @@ const RootBinding = ({ children }: PropsWithChildren) => {
   //   return bindThemeParamsCSSVars(themeParams);
   // }, [themeParams]);
 
-  const viewport = useViewport();
+  // const viewport = useViewport();
 
-  useEffect(() => {
-    return viewport && bindViewportCSSVars(viewport);
-  }, [viewport]);
+  // useEffect(() => {
+  //   return viewport && bindViewportCSSVars(viewport);
+  // }, [viewport]);
 
   return <>{children}</>;
 };
