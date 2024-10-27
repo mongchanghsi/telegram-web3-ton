@@ -15,4 +15,5 @@ const TopNavigation = forwardRef((_, ref: LegacyRef<HTMLElement>) => {
   );
 });
 
+TopNavigation.displayName = "TopNavigation";
 export default TopNavigation;

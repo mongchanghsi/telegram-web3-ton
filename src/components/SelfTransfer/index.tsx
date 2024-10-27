@@ -1,8 +1,8 @@
-import { shortenAddress } from "@/utils/address";
 import { useTonConnectUI, useTonAddress } from "@tonconnect/ui-react";
 import Card from "../Shared/Card";
 import Button from "../Shared/Button";
 import { toGweiTon } from "@/utils/parse";
+import { HandleGenericError } from "@/utils/error";
 
 type Transaction = {
   validUntil: number;
@@ -27,8 +27,12 @@ const SelfTransfer = () => {
 
   const handleSendTransaction = async () => {
     try {
-      const response = await tonConnectUI.sendTransaction(transaction);
-    } catch (error) {}
+      await tonConnectUI.sendTransaction(transaction);
+      // TODO: Fix response
+    } catch (error) {
+      const _error = HandleGenericError(error);
+      console.log(`SelfTransfer | handleSelfTransaction | Error - `, _error);
+    }
   };
 
   return (

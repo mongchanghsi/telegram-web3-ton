@@ -38,6 +38,7 @@ const Button: FC<IProps> = ({
 }) => {
   return (
     <ButtonContainer
+      id={id}
       size={size}
       onClick={onClick}
       variant={variant}

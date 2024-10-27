@@ -38,4 +38,5 @@ const BottomNavigation = forwardRef((_, ref: LegacyRef<HTMLElement>) => {
   );
 });
 
+BottomNavigation.displayName = "BottomNavigation";
 export default BottomNavigation;

@@ -1,5 +1,4 @@
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { useTonWallet } from "@tonconnect/ui-react";
+import { PropsWithChildren } from "react";
 
 const RootDesktopLayout = ({ children }: PropsWithChildren) => {
   return <>{children}</>;

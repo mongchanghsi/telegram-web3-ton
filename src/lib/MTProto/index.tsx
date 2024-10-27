@@ -4,7 +4,7 @@ import ENVIRONMENT from "@/configuration/environment";
 import { SignInResponse, User } from "./types";
 
 const sessionPath = path.join(process.cwd(), "sessions", "session.json");
-const sessionFilePath = path.join(sessionPath, "session.json");
+// const sessionFilePath = path.join(sessionPath, "session.json");
 
 class MTProtoClient {
   _mtProto?: MTProto;
@@ -19,10 +19,14 @@ class MTProtoClient {
     });
   }
 
-  async call(method: string, params: any = {}, options: any = {}) {
+  async call(
+    method: string,
+    params: Record<string, unknown> = {},
+    options: Record<string, unknown> = {}
+  ) {
     try {
       return await this._mtProto?.call(method, params, options);
-    } catch (error: any) {
+    } catch (error: unknown) {
       return error;
     }
   }
@@ -70,7 +74,9 @@ class MTProtoClient {
     return response;
   }
 
-  async fetchContactIds(): Promise<any[]> {
+  async fetchContactIds(): Promise<
+    { id: number; username: string; firstName: string }[]
+  > {
     const response = await this.call("contacts.getContacts", {
       hash: 0,
     });

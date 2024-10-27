@@ -61,7 +61,7 @@ const Auth = () => {
 
   const handleSignIn = async () => {
     try {
-      const response = await fetch(TELEGRAM_API_RESOURCE.SIGN_IN, {
+      await fetch(TELEGRAM_API_RESOURCE.SIGN_IN, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Auth = () => {
     }
   };
 
-  const handleCodeChange = (e: any) => {
+  const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
   };
 
@@ -113,7 +113,7 @@ const Auth = () => {
           <>
             <p>Found {users.length} contacts</p>
             {(users || []).map((user) => (
-              <AuthContactCard>
+              <AuthContactCard key={user.id}>
                 <p>{user.username}</p>
                 <p>{user.id}</p>
               </AuthContactCard>

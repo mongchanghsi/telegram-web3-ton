@@ -1,9 +1,7 @@
 import { init, isTMA } from "@telegram-apps/sdk-react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import App from "next/app";
 import { PropsWithChildren, useMemo, useEffect, useState } from "react";
 import RootLayout from "./RootLayout";
-import RootBinding from "./RootBinding";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RootDesktopLayout from "./Desktop/RootDesktopLayout";
 import Spinner from "../Loader/Spinner";
@@ -52,9 +50,7 @@ const RootProviders = ({ children }: PropsWithChildren) => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={darkTheme}>
           {isInTelegramWebApp ? (
-            <RootLayout>
-              <RootBinding>{children}</RootBinding>
-            </RootLayout>
+            <RootLayout>{children}</RootLayout>
           ) : (
             <RootDesktopLayout>{children}</RootDesktopLayout>
           )}

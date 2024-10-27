@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import mtProtoClient from "@/lib/MTProto";
+import { HandleGenericError } from "@/utils/error";
 
 export async function POST(request: Request) {
   try {
@@ -11,14 +12,10 @@ export async function POST(request: Request) {
         status: 400,
       });
 
-    const response = await mtProtoClient.signIn(
-      phone_number,
-      phone_code_hash,
-      phone_code
-    );
-    return NextResponse.json("", { status: 200 });
-  } catch (error: any) {
-    console.log(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    await mtProtoClient.signIn(phone_number, phone_code_hash, phone_code);
+    return NextResponse.json({ status: 201 });
+  } catch (error) {
+    const _error = HandleGenericError(error);
+    return NextResponse.json({ error: _error }, { status: 500 });
   }
 }

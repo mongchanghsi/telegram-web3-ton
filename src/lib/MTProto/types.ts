@@ -38,6 +38,6 @@ export type User = {
 export type SignInResponse = {
   flags: number;
   setup_password_required: boolean;
-  future_auth_token: any;
+  future_auth_token: unknown;
   user: User;
 };
