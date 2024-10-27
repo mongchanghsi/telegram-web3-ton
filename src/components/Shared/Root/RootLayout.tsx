@@ -23,6 +23,7 @@ const RootLayoutContainer = styled.div`
 const RootLayoutContent = styled.div<{
   topOffset: number;
   bottomOffset: number;
+  viewportHeight: number;
 }>`
   position: relative;
   width: 100%;
@@ -32,21 +33,8 @@ const RootLayoutContent = styled.div<{
   overflow-y: auto;
   overflow-x: hidden;
 
-  ${({ topOffset, bottomOffset }) => css`
-    min-height: calc(
-      100vh - ${topOffset}px - ${bottomOffset}px
-    ); /* old browsers */
-    min-height: calc(
-      100dvh - ${topOffset}px - ${bottomOffset}px
-    ); /* new browsers */
-
-    max-height: calc(
-      100vh - ${topOffset}px - ${bottomOffset}px
-    ); /* old browsers */
-    max-height: calc(
-      100dvh - ${topOffset}px - ${bottomOffset}px
-    ); /* new browsers */
-
+  ${({ topOffset, bottomOffset, viewportHeight }) => css`
+    height: calc(${viewportHeight}px - ${topOffset}px - ${bottomOffset}px);
     margin-top: ${topOffset}px;
   `}
 `;
@@ -59,10 +47,35 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   const [bottomNavigationOffset, setBottomNavigationOffset] =
     useState<number>(0);
 
+  const [viewportHeight, setViewportHeight] = useState<number>(
+    window.innerHeight
+  );
+
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState<boolean>(false);
+  const initialViewportHeight = window.innerHeight;
+
   useEffect(() => {
     setTopNavigationOffset(topNavigationRef.current?.clientHeight ?? 0);
     setBottomNavigationOffset(bottomNavigationRef.current?.clientHeight ?? 0);
   }, [topNavigationRef.current, bottomNavigationRef.current]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const currentViewportHeight =
+        window.visualViewport?.height || window.innerHeight;
+      setViewportHeight(currentViewportHeight);
+      setIsKeyboardVisible(currentViewportHeight < initialViewportHeight * 0.8);
+    };
+
+    window.visualViewport?.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -70,8 +83,9 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <BottomNavigation ref={bottomNavigationRef} />
       <RootLayoutContainer>
         <RootLayoutContent
+          viewportHeight={viewportHeight}
           topOffset={topNavigationOffset}
-          bottomOffset={bottomNavigationOffset}
+          bottomOffset={isKeyboardVisible ? 0 : bottomNavigationOffset}
         >
           {children}
         </RootLayoutContent>
