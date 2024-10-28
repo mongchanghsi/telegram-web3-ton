@@ -15,10 +15,14 @@ interface IProps {
   endIcon?: JSX.Element | string;
 }
 
-const RenderButtonIcon = (icon: JSX.Element | string, alt: string) => {
+const RenderButtonIcon = (
+  icon: JSX.Element | string,
+  alt: string,
+  size: "tiny" | "small" | "medium" | "large"
+) => {
   if (typeof icon === "string") {
     return (
-      <ButtonIcon>
+      <ButtonIcon size={size}>
         <Image src={icon} alt={alt} fill />
       </ButtonIcon>
     );
@@ -44,9 +48,9 @@ const Button: FC<IProps> = ({
       variant={variant}
       disabled={disabled}
     >
-      {startIcon && RenderButtonIcon(startIcon, label ?? "")}
+      {startIcon && RenderButtonIcon(startIcon, label ?? "", size)}
       {label}
-      {endIcon && RenderButtonIcon(endIcon, label ?? "")}
+      {endIcon && RenderButtonIcon(endIcon, label ?? "", size)}
     </ButtonContainer>
   );
 };

@@ -71,8 +71,19 @@ export const ButtonContainer = styled.button<{
   }
 `;
 
-export const ButtonIcon = styled.div`
+export const ButtonIcon = styled.div<{
+  size: "tiny" | "small" | "medium" | "large";
+}>`
   position: relative;
-  height: 24px;
   aspect-ratio: 1/1;
+
+  ${({ theme, size }) => css`
+    height: ${size === "tiny"
+      ? theme.fontSizes.medium
+      : size === "small"
+        ? theme.fontSizes.large
+        : size === "medium"
+          ? theme.fontSizes.large
+          : theme.fontSizes.xlarge};
+  `}
 `;
