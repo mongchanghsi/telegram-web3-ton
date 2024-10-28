@@ -77,8 +77,8 @@ const Auth = () => {
     }
   };
 
-  const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value);
+  const handleCodeChange = (value: string) => {
+    setCode(value);
   };
 
   const handleFetchContacts = async () => {

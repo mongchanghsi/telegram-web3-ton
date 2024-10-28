@@ -14,8 +14,8 @@ const baseTheme = {
   spacing: {
     small: "8px",
     medium: "12px",
-    large: "16rem",
-    xlarge: "24rem",
+    large: "16px",
+    xlarge: "24px",
   },
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
 };
